@@ -1,0 +1,22 @@
+body{font-size:2.1em; background: #aaa;}
+li{padding-bottom:0.5em;}
+.reveal{
+  background:#aaa url(http://farm3.staticflickr.com/2815/11415002073_acd0965446_b.jpg) no-repeat center fixed; 
+  -webkit-background-size: cover; /* pour Chrome et Safari */
+  -moz-background-size: cover; /* pour Firefox */
+  -o-background-size: cover; /* pour Opera */
+  background-size: cover; /* version standardisée */
+}
+.reveal .slides section.present{ background:rgba(255,255,255,0.9); border-radius:1em; }
+.reveal .slides section.past, .reveal .slides section.future{ background: #eee; border-radius:1em; }
+.reveal .slides>section, .reveal .slides>section>section{ padding:1em; }
+.reveal ul { width: 100%; }
+h1, h2,h3,h4,h5,h6,.txt-center{ text-align:center; }
+/**
+ * FULL SCREEN API
+ */
+#fullscreenElement:-webkit-full-screen #fullscreenhelp	{ display:none; }
+#fullscreenElement:-moz-full-screen #fullscreenhelp	    { display:none; }
+#fullscreenElement:-ms-full-screen #fullscreenhelp		{ display:none; }
+#fullscreenElement:-o-full-screen #fullscreenhelp		{ display:none; }
+#fullscreenElement:full-screen #fullscreenhelp			{ display:none; }

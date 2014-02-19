@@ -1,0 +1,504 @@
+
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Front end for dummies.</title>
+
+		<meta name="description" content="Front end for dummies.">
+		<meta name="author" content="https://twitter.com/J_et_martin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/additions.css">
+		<link rel="stylesheet" href="css/api-demos.css">
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal" id="fullscreenElement">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section class="txt-center">
+					<h1 class="text-primary">Front end for dummies</h1>
+					<h4>By @j_et_martin</h4>
+					<p id="fullscreenhelp"><small>Click to set fullscreen.</small></p>
+				</section>
+
+				<section id="me">
+					<h2>Who Am I ?</h2>
+					<ul class="fragments small">
+						<li class="fragment">J-Et. MARTIN</li>
+						<li class="fragment">Sr. Developer, Valtech</li>
+						<li class="fragment"><a href="http://twitter.com/j_et_martin">@j_et_martin</a><br /><a href="http://github.com/jetmartin">github.com/jetmartin</a></li>
+					</ul>
+				</section>
+
+				<section id="why">
+					<h2>Why this presentation ?</h2>
+					<ul class="fragments small">
+						<li class="fragment">Any thought on this ?</li>
+						<li class="fragment">Front end is not only "painting" your site/application</li>
+						<li class="fragment">It's part of the succes of any project</li>
+						<li class="fragment">It could be much more (did you heard about front end architect ?)</li>
+					</ul>
+				</section>
+
+				<section id="Sumary">
+					<h2>Summary</h2>
+					<ul class="fragments small">
+						<li class="fragment">What I will not talk about</li>
+						<li class="fragment">FEO stuff</li>
+						<li class="fragment">Coding standard</li></li>
+						<li class="fragment">Project needs</li>
+						<li class="fragment">Coding & testing</li>
+						<li class="fragment">CSS</li>
+						<li class="fragment">JavaScripts</li>
+						<li class="fragment">Some HTML5 cool features</li>
+						<li class="fragment">Time to review code</li>
+					</ul>
+				</section>
+
+				<section id="i-will-not">
+					<h2>I will not talk about :</h2>
+					<ul class="small">
+						<li class="fragment">The truth (I will sometimes simplify)</li>
+						<li class="fragment">Real code (except on the example)</li>
+						<li class="fragment">Back end stuff</li>
+					</ul>
+					<h2>Why ?</h2>
+					<ul class="small">
+						<li class="fragment">You all have different experiences and skill levels</li>
+						<li class="fragment">You must understand the main frame</li>
+					</li>
+				</section>
+
+				<section id="feo">
+					<section id="feo-Basics">
+						<h2>FEO Basics</h2>
+						<ul class="fragments small">
+							<li class="fragment">Limit the number of HTTP request
+								<br />Compile your CSS & JS if possible (using Grunt, the CMS, the Framework, ...)
+							</li>
+							<li class="fragment">Minify your files.
+								<br />Minify the CSS & JS (using Grunt, the CMS, the Framework, ...)
+								<br /><strong>Do not write code that is already minified ! Think about the maintenance</strong>
+							</li>
+							<li class="fragment">Styles on top, JS on bottom
+								<br />When the browser loads JS, it stops the parallelism to prevent issues because the JS should be loaded in the apropriate order (ex : framework first)
+								<br /><strong>Exception</strong> for browser compatibility scripts as Modernizr or html5shiv
+							</li>
+							<li class="fragment">Use Sprints
+								<br />Instead of loading many images, you only have one http request
+								<br />The sprint will be in browser cache for all the pages
+							</li>
+						</ul>
+					</section>
+					<section id="fea-advance">
+						<h2>FEO advance</h2>
+						<ul class="fragments small">
+							<li class="fragment">Use Gzip
+								<br />Gzip all the text elements (CSS & JS at least)
+							</li>
+							<li class="fragment">Use parallelism
+								<br />Use many subdomains. Your browser will limit the number of requests to the same domain at the same time
+								<br />Using many domains allow you to multiply that limit by the number of domains
+							</li>
+							<li class="fragment">The CSS must be served early
+								<span class="fragment"><br /><strong>Do not use parallelism on CSS !</strong></span>
+							</li>
+							<li class="fragment">HTTP request & DNS lookup
+								<br />Limit the http request as much as possible (compilation)
+								<br />Limit the DNS lookup (multiplicty of domains)
+								<span><br /><strong>There is no contradiction with parallelism, you must adapt to your context</strong></span>
+							</li>
+							<li class="fragment">DNS & Assets prefetching
+								<br />A DNS request is from 30 to 200 ms. Usually more than 100ms and in the worst case half a second !
+								<br />
+								<br />Do only prefetch a page if there is a high chance for the user to go on this page (using meta rel="next" as an example)
+								<br />Prefetch the sprints (if many). It can be a good start to prefetching
+								<br />
+								<br />
+								<code>&lt;link rel="prefetch" href="http://www.mondomaine.com/autre_page.html"&gt;<br />&lt;link rel="prefetch" href="http://www.mondomaine.com/autre_feuille_de_styles.css"&gt;</code>
+							</li>
+						</ul>
+					</section>
+					<section id="fea-advance">
+						<h2>FEO more...</h2>
+						<ul class="fragments small">
+							<li class="fragment">Do not use .htacess (or web.config, ...)
+								<br />Use "Directory" to not slow down your Apache
+							</li>
+							<li class="fragment">Minify all of what you can
+								<br />even HTML & SVG !
+							</li>
+							<li class="fragment">Gzip all the text elements including text assets as SVG !
+							</li>
+							<li class="fragment">Use apropriate image format
+								<br />JPG, PNG, webP, SVG, ...
+								<span class="fragment"><br />As an example, "appropriate" means : Do not use SVG if old browsers are in your scope...</span>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section id="coding-standards">
+					<h2>Coding standards :</h2>
+					<ul class="fragments small">
+						<li class="fragment">There are no coding standards in real life</li>
+						<li class="fragment">Respect the coding structure of the curent project!</li>
+						<li class="fragment">Use explicit names for all your class, variables,...</li>
+						<li class="fragment">Comment your code</li>
+						<li class="fragment">Make only useful comments... do not do :
+							<br />
+							<code>var a = something; // I setup the var a.</code>
+							<br />
+							<br />Do not name your var "a".
+							<br />Why did you setup this var ? What will be stored in ? What for ? ...
+						</li>
+					</ul>
+				</section>
+
+				<section id="coding-standards">
+					<h2>Project needs :</h2>
+					<ul class="fragments small">
+						<li class="fragment">First of all : what is the browser scope ?
+							<br />What browser, release ?
+							<br />What devices ?
+							<br />On what devices the client will do the final validation ?
+						</li>
+						<li class="fragment">Do you really think you have specific needs ?</li>
+						<li class="fragment">Look at the contrib first
+							<br />You almost never had some specific needs
+							<span class="fragment"><br />You still think you have a specific need ?</span>
+							<span class="fragment"><br />Look again...</span>
+						</li>
+						<li class="fragment">Be careful if you want to use the "latest" functionality even if it's cool or easier</li>
+					</ul>
+				</section>
+
+				<section id="coding-testing">
+					<h2>Coding & testing</h2>
+					<ul class="fragments small">
+						<li class="fragment">Develop & <strong>test on real devices</strong>
+							<br />all along the development not only for QA !
+							<br />Do not emulate the devices or slow connection, there are no perfect tools
+						</li>
+						<li class="fragment">Do not use device detection !</li>
+						<li class="fragment">Use browser functionalities detection
+							<br />Take a look at <a href="http://modernizr.com" title="">Modernizr</a>.
+						</li>
+					</ul>
+				</section>
+
+				<section id="css">
+					<h2>CSS</h2>
+					<ul class="fragments small">
+						<li class="fragment">Separate layout & designs.
+							<br />A grid system is part of the layout, the color of the button part of the designs
+							<br />You can now change the design easily and keep the layout !
+						</li>
+						<li class="fragment">Use different class for design & layout.</li>
+						<li class="fragment">If you use CSS3 animation, it should be part of the design</li>
+						<li class="fragment">If possible use a grid-system or a framework
+							<br />You will save time and prevent bugs
+						</li>
+						<li class="fragment">For advance optimization do not use them... again, adapt to your context</li>
+					</ul>
+				</section>
+
+				<section id="js">
+					<h2>JavaScripts</h2>
+					<ul class="fragments small">
+						<li class="fragment">You will probably use a framework.</li>
+						<li class="fragment">Use the framework <small>(even if you don't like it)</small>.</li>
+						<li class="fragment">Respect the framework<small>(even if you don't like it)</small>.</li>
+						<li class="fragment">Use objects or plugins</li>
+						<li class="fragment">Take care of your event listeners</li>
+						<li class="fragment">Take care of the contexts</li>
+						<li class="fragment">Separate layout & interactions</li>
+						<li class="fragment">If you use some class for JS interactions, plese use a "js-" prefix, as "js-animate"</li>
+						<li class="fragment">Do not modify CSS on the fly, use class
+							<br />If the layout changes, you will not have to modify the JS
+						</li>
+						<li class="fragment">Duckpunching
+							<br />Do not talk about Duckpunching...
+						</li>
+					</ul>
+				</section>
+
+				<section id="html5">
+					<section id="html5-title">
+						<h2>Some HTML5 cool features :</h2>
+					</section>
+					<section id="html5-js">
+						<h2>JS side :</h2>
+						<ul class="small">
+							<li class="fragment">Full screen API</li>
+							<li class="fragment">X-speech
+								<br />
+								<input type="text" placeholder="Placeholder" x-speech x-webkit-speech />
+							</li>
+							<li class="fragment">Local Storage</li>
+							<li class="fragment">IndexedDB (except on Safari, sad...)</li>
+							<li class="fragment">WebRTC (Real Time Web)</li>
+							<li class="fragment">Battery Status API
+								<br />
+								<input id="batteryStatus" value="" />
+							</li>
+							<li class="fragment">Vibration API(except on Safari, sad...)</li>
+							<li class="fragment">Using geolocation</li>
+							<li class="fragment">and more new standard features in progress !</li>
+						</ul>
+					</section>
+					<section id="html5-css">
+						<h2>CSS side :</h2>
+						<p>Be very careful if you use these features, take care of the browser scope !</p>
+						<ul>
+							<li class="fragment"><a href="http://www.w3.org/TR/css3-values/#calc">CSS calc()</a></li>
+							<li class="fragment"><a href="http://www.w3.org/TR/2014/WD-css-grid-1-20140123/">CSS Grid Layout</a></li>
+							<li class="fragment"><a href="http://dev.w3.org/csswg/css-regions/">CSS regions</a></li>
+							<li class="fragment">and more new standard features in progress !</li>
+						</ul>
+					</section>
+					<section id="html5-more">
+						<h2>More :</h2>
+						<p>Even Http headers are changing !</p>
+						<ul>
+							<li class="fragment"><a href="http://www.w3.org/TR/CSP/">Content Security Policy</a>
+								<br /><pre>Content-Security-Policy: script-src 'self' https://apis.google.com</pre>
+								<br />Protect to XSS, exception made for some domains as "self"  & "apis.google.com".</li>
+							<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options">X-FRAME-OPTIONS</a>
+								<br />Make the content unable to be loaded on an iframe.</li>
+							<li class="fragment">and more new standard features in progress !</li>
+						</ul>
+					</section>
+					<section id="html5-demo">
+						<p>Here is an example of a new kind of web app using WebRTC & X-speech : <a href="https://dprhcp108.doteasy.com/~johndimm/talkshow/">Talkshow</a></p>
+						<iframe src="https://dprhcp108.doteasy.com/~johndimm/talkshow/" width="100%" height="400px"></iframe>
+					</section>
+				</section>
+
+				<section id="look-at-some-code">
+					<section id="context">
+						<h2>Time to review code</h2>
+					</section>
+					<section id="context">
+						<h2>Context</h2>
+						<p>Using jQuery, you will have two dropdowns
+							<br />The items of the second one depend of the current selected item from the first one
+							<br />The datas are provided by a JSON/REST webservice</p>
+						<p class="fragment">The following code is issued from a real project source code history</p>
+						<p class="fragment">The commits are scheduled on several days, that means it seems to be a big job</p>
+					</section>
+					<section id="codes1">
+						<h2>V1</h2>
+						<p>35 lines of code</p>
+						<pre style="height:300px; overflow:scroll;">; (function ($) {
+    $.fn.listbox = function () {
+        this.each(function () {
+            $(this).bind("change", listBox);
+        });
+        return $(this);
+    };
+    function listBox(events, object) {
+        var trigger = events ? $(this) : object;
+        var source = trigger.attr("data-listbox-source") == "" ? $(this) : $(trigger.attr("data-listbox-source"));
+        if (trigger.attr("data-listbox-target") != "") {
+
+            var target = $(trigger.attr("data-listbox-target"));
+            var url = trigger.attr("data-listbox-url");
+            $.ajax({
+                url: url,
+                data: { id: source.val() },
+                success: function (data) {
+                    format(target, data);
+                }
+            });
+        }
+    }
+    function format(target, data) {
+        target.empty();
+        $.each(data, function (index, item) {
+            target.append("&lt;option value='" + item.Value + "'&gt;" + item.Text + "&lt;/option&gt;");
+        });
+    }
+
+
+    $(document).ready(function () {
+        $('select.listbox').listbox();
+    });
+})(jQuery)</pre>
+					</section>
+					<section id="codes2">
+						<h2>V2</h2>
+						<p>45 lines of code</p>
+						<pre style="height:300px; overflow:scroll;">; (function ($) {
+    $.fn.LinkedListbox = function () {
+
+
+        function linkedListbox(events, object) {
+            var trigger = events ? $(this) : object;
+            var source = trigger.attr("data-listbox-source") == "" ? $(this) : $(trigger.attr("data-listbox-source"));
+            if (trigger.attr("data-listbox-target") != "") {
+
+                var target = $(trigger.attr("data-listbox-target"));
+                var url = trigger.attr("data-listbox-url");
+                $.ajax({
+                    url: url,
+                    data: { id: source.val() },
+                    success: function (data) {
+                        format(target, data);
+                    }
+                });
+            }
+        }
+
+        function format(target, data) {
+            target.empty();
+            if (data.length > 0) {
+                target.removeAttr('disabled');
+                $.each(data, function (index, item) {
+                    target.append("&lt;option value='" + item.Value + "'&gt;" + item.Text + "&lt;/option&gt;");
+                });
+            } else {
+                target.attr('disabled', 'disabled');
+            }
+
+        }
+
+        this.each(function () {
+            $(this).bind("change", linkedListbox);
+        });
+        return $(this);
+    };
+
+
+    $(document).ready(function () {
+        $('select.listbox').LinkedListbox();
+    });
+})(jQuery)</pre>
+					</section>
+					<section id="codes3">
+						<h2>V3</h2>
+						<p>... each release doesn't matter ...</p>
+						<p>I will not review the code but talk about the main frame</p>
+					</section>
+					<section id="contrib">
+						<h2>Hold on, look at the contrib first !</h2>
+						<p class="fragment">Crap ! Your function name already exists :
+							<br /><a href="http://plugins.jquery.com/listbox/">plugins.jquery.com/listbox/</a></p>
+						<p class="fragment">A simple search : "<em>select ajax</em>" on <a href="http://plugins.jquery.com">plugins.jquery.com</a>.</p>
+						<p class="fragment">Uh ! I guess it already exists... it's at least very close :
+							<br /><a href="http://plugins.jquery.com/chained/">plugins.jquery.com/chained/</a></p>
+						<p class="fragment">I can try the demo to be sure that this is what I need<span class="fragment">
+							<br />No, try the demo, it will make sure that it's what you need
+							<br />and looking at the demo code will save your time the first time</span></p>
+						<p class="fragment">I've just saved my time and the code is already tested and documented !
+							<br />Using apropriate search, I've spent less than 10 minutes (including testing)</p>
+					</section>
+					<section id="look-code1">
+						<h2>Now, look at the code</h2>
+						<pre>; (function ($) {
+    $.fn.listbox = function () {
+    };
+    function listBox(events, object) {
+    	var trigger = [...];
+    }
+    function format(target, data) {
+    }
+    $(document).ready(function () {
+        $('select.listbox').listbox();
+    });
+})(jQuery)</pre>
+						<p class="fragment">Oh ? any comments ? so sad...</p>
+						<p class="fragment">A variable named "trigger" ? It's a little confusing, isn't it ?</p>
+						<p class="fragment">You can see the developer has taken some time to look at the jQuery doc : "How to made a plugin". but...</p>
+						<p class="fragment">These functions are not part of the plugin... take care of common names such as "format", some other tool may use it...</p>
+						<p class="fragment">The event listener is part of the plugin ? What happens if you want to use it elsewhere ? use AJAX ?</p>
+						<p class="fragment">Did you think about it : could it be on multiples elements ? Will the event affect a single one or all of them ?</p>
+					</section>
+					<section id="look-code2">
+						<h2>Now, look at the code V2</h2>
+						<pre>; (function ($) {
+    $.fn.LinkedListbox = function () {
+        function linkedListbox(events, object) {
+        }
+        function format(target, data) {
+        }
+    };
+    $(document).ready(function () {
+        $('select.listbox').LinkedListbox();
+    });
+})(jQuery)</pre>
+						<p class="fragment">Still no comments...</p>
+						<p class="fragment">Now the functions are part of the plugin itself. No risk of conflict</p>
+						<p class="fragment">There is finally a V3 for having a single event listener out of the plugin :</p>
+						<pre class="fragment">
+    $(document).ready(function () {
+        $('select.listbox').on('change', function() {
+            $(this).LinkedListbox();
+        });
+    });</pre>
+					</section>
+				</section>
+
+				<section id="thank-you">
+					<h1>Thank You</h1>
+				</section>
+
+
+			</div>
+
+			<!-- <div id="pagecounter"></div> -->
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="plugin/prism.js"></script>
+		<script src="js/pages.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } }
+					, { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+					, { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+					, { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+					, { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		)
+    </script>
+		<script src="js/api-demos.js"></script>
+
+	</body>
+</html>
